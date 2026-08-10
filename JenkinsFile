@@ -4,33 +4,33 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Compile') {
             steps {
-                bat 'mvn clean compile'
+                dir('student-management-api') {
+                    bat 'mvn clean compile'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                dir('student-management-api') {
+                    bat 'mvn test'
+                }
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package -DskipTests'
+                dir('student-management-api') {
+                    bat 'mvn package -DskipTests'
+                }
             }
         }
 
         stage('Archive Artifact') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                archiveArtifacts artifacts: 'student-management-api/target/*.jar', fingerprint: true
             }
         }
 
@@ -57,4 +57,3 @@ pipeline {
         }
     }
 }
-```
