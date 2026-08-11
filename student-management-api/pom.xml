@@ -4,117 +4,141 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.1.0</version>
-		<relativePath/>
-	</parent>
+    <!-- Spring Boot Parent -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version>
+        <relativePath/>
+    </parent>
 
-	<groupId>com.example</groupId>
-	<artifactId>practice</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+    <!-- Project Information -->
+    <groupId>com.example</groupId>
+    <artifactId>practice</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-	<name>practice</name>
-	<description>Student Management API</description>
+    <name>practice</name>
+    <description>Student Management API</description>
 
-	<properties>
-		<java.version>21</java.version>
+    <!-- Properties -->
+    <properties>
 
-		<!-- SonarQube -->
-		<sonar.projectKey>student-management-api</sonar.projectKey>
-		<sonar.projectName>Student Management API</sonar.projectName>
-	</properties>
+        <java.version>21</java.version>
 
-	<dependencies>
+        <!-- SonarQube Configuration -->
+        <sonar.projectKey>student-management-api</sonar.projectKey>
+        <sonar.projectName>Student Management API</sonar.projectName>
 
-		<!-- Spring Boot Web -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
-		</dependency>
+    </properties>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
+    <!-- Dependencies -->
+    <dependencies>
 
-		<!-- Lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
 
-		<!-- Spring Boot Test -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <!-- Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
 
-	</dependencies>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
-	<build>
+        <!-- Spring Boot Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-		<plugins>
+    </dependencies>
 
-			<!-- Spring Boot Maven Plugin -->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+    <!-- Build Configuration -->
+    <build>
 
-			<!-- Maven Compiler Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
+        <plugins>
 
-				<executions>
+            <!-- Spring Boot Maven Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
 
-					<execution>
-						<id>default-compile</id>
-						<phase>compile</phase>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
 
-						<goals>
-							<goal>compile</goal>
-						</goals>
+                <executions>
 
-						<configuration>
-							<annotationProcessorPaths>
-								<path>
-									<groupId>org.projectlombok</groupId>
-									<artifactId>lombok</artifactId>
-								</path>
-							</annotationProcessorPaths>
-						</configuration>
-					</execution>
+                    <!-- Compile -->
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>compile</phase>
 
-					<execution>
-						<id>default-testCompile</id>
-						<phase>test-compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
 
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
+                        <configuration>
+                            <annotationProcessorPaths>
 
-						<configuration>
-							<annotationProcessorPaths>
-								<path>
-									<groupId>org.projectlombok</groupId>
-									<artifactId>lombok</artifactId>
-								</path>
-							</annotationProcessorPaths>
-						</configuration>
-					</execution>
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                </path>
 
-				</executions>
-			</plugin>
+                            </annotationProcessorPaths>
+                        </configuration>
 
-		</plugins>
+                    </execution>
 
-	</build>
+                    <!-- Test Compile -->
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>test-compile</phase>
+
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+
+                        <configuration>
+                            <annotationProcessorPaths>
+
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                </path>
+
+                            </annotationProcessorPaths>
+                        </configuration>
+
+                    </execution>
+
+                </executions>
+
+            </plugin>
+
+            <!-- SonarQube Maven Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>5.3.1.6276</version>
+            </plugin>
+
+        </plugins>
+
+    </build>
 
 </project>
