@@ -20,6 +20,16 @@ pipeline {
             }
         }
 
+        stage('SonarQube Analysis') {
+            steps {
+                dir('student-management-api') {
+                    withSonarQubeEnv('SonarQube') {
+                        bat 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
+
         stage('Package') {
             steps {
                 dir('student-management-api') {
@@ -30,24 +40,16 @@ pipeline {
 
         stage('Archive Artifact') {
             steps {
-                archiveArtifacts artifacts: 'student-management-api/target/*.jar', fingerprint: true
+                archiveArtifacts(
+                    artifacts: 'student-management-api/target/*.jar',
+                    fingerprint: true
+                )
             }
         }
-
-        stage('SonarQube Analysis') {
-            steps {
-                dir('student-management-api') {
-                    withSonarQubeEnv('sonarqube') {
-                        bat 'mvn sonar:sonar'
-                    }
-                }
-            }
-        }
-
-
     }
 
     post {
+
         success {
             echo 'CI Pipeline completed successfully!'
         }
